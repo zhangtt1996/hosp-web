@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>温州市中心医院 - 住院菜单栏</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #2e8b57;
+            --accent-color: #fbbc05;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fa;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --card-bg: rgba(255, 255, 255, 0.95);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans SC', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e6f2ff 0%, #f0f7ff 100%);
+            color: var(--dark-color);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 100%;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0d5bba 100%);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+            top: -25%;
+            left: -25%;
+        }
+        
+        .logo i {
+            color: white;
+            font-size: 40px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        
+        .hospital-name {
+            color: var(--secondary-color);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            color: #5f6368;
+            font-size: 15px;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        
+        .menu-item {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 22px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(224, 224, 224, 0.4);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            border-color: rgba(26, 115, 232, 0.2);
+        }
+        
+        .menu-item i {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 14px;
+            display: block;
+            text-shadow: 0 2px 3px rgba(0,0,0,0.05);
+        }
+        
+        .menu-item h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--dark-color);
+        }
+        
+        .menu-item p {
+            font-size: 13px;
+            color: #5f6368;
+            line-height: 1.4;
+        }
+        
+        .menu-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, #0d5bba 100%);
+            transform: scaleX(0);
+            transition: var(--transition);
+            transform-origin: right;
+        }
+        
+        .menu-item:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .module-content {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-top: 20px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(224, 224, 224, 0.4);
+            display: none;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .module-header h2 {
+            color: var(--primary-color);
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .close-btn {
+            background: #f0f4f9;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            color: #5f6368;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-btn:hover {
+            background: #e4eaf2;
+            color: var(--primary-color);
+        }
+        
+        .content-section {
+            margin-bottom: 25px;
+        }
+        
+        .content-section h3 {
+            color: var(--dark-color);
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f4f9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .content-section h3 i {
+            color: var(--primary-color);
+        }
+        
+        .content-section ul {
+            padding-left: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .info-card {
+            background: #f0f7ff;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .info-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .doctor-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f9fbfe;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .doctor-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #e0eaf5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .doctor-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .avatar-placeholder {
+            color: var(--primary-color);
+            font-size: 26px;
+        }
+        
+        .doctor-info h4 {
+            font-size: 17px;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .doctor-info p {
+            font-size: 14px;
+            color: #5f6368;
+            margin-bottom: 3px;
+        }
+        
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .schedule-card {
+            background: #f9fbfe;
+            border-radius: 10px;
+            padding: 15px;
+            border: 1px solid #e0eaf5;
+        }
+        
+        .schedule-card h4 {
+            color: var(--primary-color);
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .schedule-card p {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .nfc-info {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 18px;
+            margin-top: 20px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(224, 224, 224, 0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        
+        .nfc-info i {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+        
+        .nfc-info p {
+            font-size: 14px;
+            color: #5f6368;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 13px;
+            color: #7f8c9a;
+            padding: 20px 0 10px;
+        }
+        
+        .wifi-details {
+            background: #f0f7ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        
+        .wifi-info {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .wifi-info div:first-child {
+            font-weight: 500;
+            color: #5f6368;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0d5bba 100%);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(26, 115, 232, 0.2);
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(26, 115, 232, 0.25);
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .video-card {
+            background: #e0eaf5;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            position: relative;
+            aspect-ratio: 1/1;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .video-thumbnail {
+            width: 100%;
+            height: 70%;
+            background: linear-gradient(45deg, #1a73e8, #0d5bba);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-thumbnail i {
+            color: white;
+            font-size: 48px;
+            opacity: 0.8;
+        }
+        
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .video-card:hover .play-overlay {
+            opacity: 1;
+        }
+        
+        .play-overlay i {
+            color: white;
+            font-size: 48px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .video-info {
+            padding: 12px;
+            height: 30%;
+        }
+        
+        .video-info h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+            text-align: center;
+        }
+        
+        .video-info p {
+            font-size: 12px;
+            color: #5f6368;
+            text-align: center;
+        }
+        
+        .upload-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: block;
+            margin: 10px auto 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .upload-btn:hover {
+            background: #237347;
+        }
+        
+        .media-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .media-item {
+            background: #e0eaf5;
+            border-radius: 10px;
+            height: 140px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: 500;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .media-item i {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .media-upload {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .media-upload:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .media-upload i {
+            font-size: 14px;
+            margin: 0;
+            color: var(--primary-color);
+        }
+        
+        .fall-prevention {
+            background: linear-gradient(45deg, #d32f2f, #b71c1c);
+            color: white;
+        }
+        
+        .fall-prevention i {
+            color: white;
+        }
+        
+        @media (max-width: 400px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            .media-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-hospital"></i>
+            </div>
+            <h1>住院菜单栏</h1>
+            <div class="hospital-name">温州市中心医院</div>
+            <p class="subtitle">便捷医疗服务，一键触达</p>
+        </header>
+        
+        <div class="menu-grid">
+            <div class="menu-item" onclick="showModule('wifi')">
+                <i class="fas fa-wifi"></i>
+                <h3>医院网络密码</h3>
+                <p>获取医院WiFi连接信息</p>
+            </div>
+            
+            <div class="menu-item" onclick="showModule('doctors')">
+                <i class="fas fa-user-md"></i>
+                <h3>主管医生及护士</h3>
+                <p>查看您的医疗团队信息</p>
+            </div>
+            
+            <div class="menu-item" onclick="showModule('education')">
+                <i class="fas fa-book-medical"></i>
+                <h3>住院健康宣教</h3>
+                <p>了解住院期间健康知识</p>
+            </div>
+            
+            <div class="menu-item" onclick="showModule('cost')">
+                <i class="fas fa-money-bill-wave"></i>
+                <h3>住院费用</h3>
+                <p>查询住院费用明细</p>
+            </div>
+            
+            <div class="menu-item" onclick="showModule('examination')">
+                <i class="fas fa-procedures"></i>
+                <h3>今日检查</h3>
+                <p>查看今日检查安排</p>
+            </div>
+            
+            <div class="menu-item" onclick="showModule('report')">
+                <i class="fas fa-file-medical"></i>
+                <h3>检验报告</h3>
+                <p>查看您的检验结果</p>
+            </div>
+        </div>
+        
+        <!-- 医院网络密码模块 -->
+        <div class="module-content" id="wifiModule">
+            <div class="module-header">
+                <h2><i class="fas fa-wifi"></i> 医院网络密码</h2>
+                <button class="close-btn" onclick="hideModule('wifi')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="info-card">
+                <h4><i class="fas fa-info-circle"></i> 医院WiFi连接信息</h4>
+                <div class="wifi-info">
+                    <div>网络名称:</div>
+                    <div>ZXYY WiFi</div>
+                </div>
+                <div class="wifi-info">
+                    <div>密码:</div>
+                    <div id="wifiPassword">zxyy1897</div>
+                </div>
+                <button class="copy-btn" onclick="copyPassword()">
+                    <i class="fas fa-copy"></i>
+                    复制密码
+                </button>
+            </div>
+            
+            <div class="content-section">
+                <h3><i class="fas fa-lightbulb"></i> 连接提示</h3>
+                <ul>
+                    <li>连接后请勿下载大文件，确保医疗网络通畅</li>
+                    <li>如遇连接问题，请联系护士站或拨打信息科电话：0577-XXXXXXX</li>
+                    <li>网络服务时间：全天24小时</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 主管医生及护士模块 -->
+        <div class="module-content" id="doctorsModule">
+            <div class="module-header">
+                <h2><i class="fas fa-user-md"></i> 主管医生及护士</h2>
+                <button class="close-btn" onclick="hideModule('doctors')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="doctor-profile">
+                <div class="doctor-avatar">
+                    <div class="avatar-placeholder"><i class="fas fa-user-md"></i></div>
+                </div>
+                <div class="doctor-info">
+                    <h4>张明远 主任医师</h4>
+                    <p>内分泌科主任，医学博士</p>
+                    <p>擅长：糖尿病、甲状腺疾病</p>
+                    <p>专业经验：20年内分泌疾病诊疗经验</p>
+                </div>
+            </div>
+            
+            <div class="doctor-profile">
+                <div class="doctor-avatar">
+                    <div class="avatar-placeholder"><i class="fas fa-user-md"></i></div>
+                </div>
+                <div class="doctor-info">
+                    <h4>李思琪 主治医师</h4>
+                    <p>内分泌科主治医师，医学硕士</p>
+                    <p>擅长：骨质疏松、肾上腺疾病</p>
+                    <p>专业经验：10年临床经验</p>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h3><i class="fas fa-user-nurse"></i> 护理团队</h3>
+                
+                <div class="doctor-profile">
+                    <div class="doctor-avatar">
+                        <div class="avatar-placeholder"><i class="fas fa-user-nurse"></i></div>
+                    </div>
+                    <div class="doctor-info">
+                        <h4>王静 主管护师</h4>
+                        <p>内分泌科护士长</p>
+                        <p>护理经验：15年</p>
+                        <p>负责病房：301-310</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 住院健康宣教模块 -->
+        <div class="module-content" id="educationModule">
+            <div class="module-header">
+                <h2><i class="fas fa-book-medical"></i> 住院健康宣教</h2>
+                <button class="close-btn" onclick="hideModule('education')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="content-section">
+                <h3><i class="fas fa-sign-in-alt"></i> 入院须知</h3>
+                
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-thumbnail" style="background: linear-gradient(45deg, #1a73e8, #0d5bba);">
+                            <i class="fas fa-hospital-user"></i>
+                            <div class="play-overlay">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>入院流程指南</h4>
+                            <p>时长：3分15秒</p>
+                            <button class="upload-btn" onclick="uploadVideo('admissionProcess')">上传视频</button>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card">
+                        <div class="video-thumbnail" style="background: linear-gradient(45deg, #2e8b57, #34a853);">
+                            <i class="fas fa-suitcase"></i>
+                            <div class="play-overlay">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>住院物品准备</h4>
+                            <p>时长：2分40秒</p>
+                            <button class="upload-btn" onclick="uploadVideo('preparation')">上传视频</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <h4><i class="fas fa-info-circle"></i> 简要说明</h4>
+                    <p>请观看上方视频了解详细入院流程和物品准备指南，如需帮助请咨询护士站。</p>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h3><i class="fas fa-info-circle"></i> 病区环境介绍</h3>
+                
+                <div class="media-container">
+                    <div class="media-item">
+                        <i class="fas fa-map"></i>
+                        <span>病区平面图</span>
+                        <div class="media-upload" onclick="uploadImage('floorPlan')">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="media-item">
+                        <i class="fas fa-video"></i>
+                        <span>环境导览视频</span>
+                        <div class="media-upload" onclick="uploadVideo('environmentTour')">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <ul>
+                    <li>护士站位置：病区中心位置</li>
+                    <li>医生办公室：护士站右侧</li>
+                    <li>开水间：病区大门旁边</li>
+                    <li>垃圾处理：走廊尽头分类垃圾桶</li>
+                    <li>家属探视时间：9:00-20:00</li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h3><i class="fas fa-heartbeat"></i> 健康宣教</h3>
+                
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-thumbnail" style="background: linear-gradient(45deg, #fbbc05, #f9a825);">
+                            <i class="fas fa-utensils"></i>
+                            <div class="play-overlay">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>糖尿病饮食指导</h4>
+                            <p>时长：4分20秒</p>
+                            <button class="upload-btn" onclick="uploadVideo('dietGuide')">上传视频</button>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card">
+                        <div class="video-thumbnail" style="background: linear-gradient(45deg, #ea4335, #d93025);">
+                            <i class="fas fa-walking"></i>
+                            <div class="play-overlay">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>踝泵运动教学</h4>
+                            <p>时长：3分50秒</p>
+                            <button class="upload-btn" onclick="uploadVideo('ankleExercise')">上传视频</button>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card">
+                        <div class="video-thumbnail" style="background: linear-gradient(45deg, #4285f4, #1a73e8);">
+                            <i class="fas fa-vial"></i>
+                            <div class="play-overlay">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>标本留取指南</h4>
+                            <p>时长：3分10秒</p>
+                            <button class="upload-btn" onclick="uploadVideo('specimenCollection')">上传视频</button>
+                        </div>
+                    </div>
+                    
+                    <div class="video-card fall-prevention">
+                        <div class="video-thumbnail" style="background: linear-gradient(45deg, #7b1fa2, #4a148c);">
+                            <i class="fas fa-user-shield"></i>
+                            <div class="play-overlay">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                        </div>
+                        <div class="video-info">
+                            <h4>跌倒预防指南</h4>
+                            <p>时长：4分05秒</p>
+                            <button class="upload-btn" style="background: #4a148c;" onclick="uploadVideo('fallPrevention')">上传视频</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 住院费用模块 -->
+        <div class="module-content" id="costModule">
+            <div class="module-header">
+                <h2><i class="fas fa-money-bill-wave"></i> 住院费用</h2>
+                <button class="close-btn" onclick="hideModule('cost')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="content-section">
+                <h3><i class="fas fa-credit-card"></i> 费用查询</h3>
+                <div class="info-card">
+                    <h4><i class="fas fa-user-circle"></i> 当前患者信息</h4>
+                    <p>姓名：王XX</p>
+                    <p>住院号：ZY20230715678</p>
+                    <p>科室：内分泌科</p>
+                    <p>床位：3楼302室12床</p>
+                </div>
+                
+                <div class="info-card">
+                    <h4><i class="fas fa-file-invoice-dollar"></i> 费用概览</h4>
+                    <p>总费用：¥15,678.50</p>
+                    <p>医保支付：¥12,342.00</p>
+                    <p>自费金额：¥3,336.50</p>
+                    <p>预交金额：¥5,000.00</p>
+                    <p>剩余金额：¥1,663.50</p>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h3><i class="fas fa-wallet"></i> 支付方式</h3>
+                <div class="info-card" style="margin-top: 20px;">
+                    <h4><i class="fas fa-link"></i> 绑定医保卡</h4>
+                    <p>打开支付宝搜索"医保电子凭证"</p>
+                    <p>或扫描下方二维码绑定：</p>
+                    <div style="text-align: center; margin: 15px 0;">
+                        <div style="width: 120px; height: 120px; background: #e0eaf5; margin: 0 auto; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                            <i class="fas fa-qrcode" style="font-size: 60px; color: #5f6368;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 今日检查模块 -->
+        <div class="module-content" id="examinationModule">
+            <div class="module-header">
+                <h2><i class="fas fa-procedures"></i> 今日检查</h2>
+                <button class="close-btn" onclick="hideModule('examination')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="content-section">
+                <h3><i class="far fa-calendar-check"></i> 检查安排</h3>
+                <p>以下为今日安排的所有检查项目：</p>
+                
+                <div class="schedule-grid">
+                    <div class="schedule-card">
+                        <h4>血糖监测</h4>
+                        <p>时间：07:30（空腹）</p>
+                        <p>地点：病房</p>
+                        <p>注意事项：空腹</p>
+                    </div>
+                    
+                    <div class="schedule-card">
+                        <h4>腹部B超</h4>
+                        <p>时间：10:30</p>
+                        <p>地点：2号楼3层B超室</p>
+                        <p>注意事项：空腹</p>
+                    </div>
+                    
+                    <div class="schedule-card">
+                        <h4>心电图</h4>
+                        <p>时间：14:00</p>
+                        <p>地点：1号楼2层心功能室</p>
+                        <p>注意事项：检查前静坐10分钟</p>
+                    </div>
+                    
+                    <div class="schedule-card">
+                        <h4>眼科会诊</h4>
+                        <p>时间：15:30</p>
+                        <p>地点：3号楼5层眼科</p>
+                        <p>注意事项：携带所有检查资料</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h3><i class="fas fa-exclamation-triangle"></i> 检查注意事项</h3>
+                <div class="info-card">
+                    <h4><i class="fas fa-utensils"></i> 空腹检查</h4>
+                    <p>腹部B超、血糖监测等需要空腹的检查，请在检查前8小时禁食</p>
+                </div>
+                
+                <div class="info-card">
+                    <h4><i class="fas fa-capsules"></i> 药物使用</h4>
+                    <p>除降压药等必须药物外，其他药物请检查后再服用</p>
+                </div>
+                
+                <div class="info-card">
+                    <h4><i class="fas fa-walking"></i> 行动不便</h4>
+                    <p>如行动不便，请提前告知护士安排轮椅</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NFC提示 -->
+        <div class="nfc-info">
+            <i class="fas fa-nfc-symbol"></i>
+            <p>使用NFC功能碰一碰即可快速访问此页面</p>
+        </div>
+        
+        <footer>
+            <p>© 2023 住院菜单栏 - 为患者提供便捷服务</p>
+            <p style="margin-top: 8px; color: var(--secondary-color); font-weight: 500;">温州市中心医院</p>
+            <p style="margin-top: 5px; font-size: 12px;">地址：温州市鹿城区百里东路252号</p>
+        </footer>
+    </div>
+    
+    <script>
+        // 显示指定模块
+        function showModule(module) {
+            // 隐藏所有模块
+            document.querySelectorAll('.module-content').forEach(el => {
+                el.style.display = 'none';
+            });
+            // 显示指定模块
+            document.getElementById(`${module}Module`).style.display = 'block';
+            // 滚动到模块位置
+            document.getElementById(`${module}Module`).scrollIntoView({behavior: 'smooth'});
+        }
+        
+        // 隐藏模块
+        function hideModule(module) {
+            document.getElementById(`${module}Module`).style.display = 'none';
+        }
+        
+        // 复制WiFi密码
+        function copyPassword() {
+            const password = document.getElementById('wifiPassword').textContent;
+            navigator.clipboard.writeText(password).then(() => {
+                alert('密码已复制到剪贴板');
+            }).catch(err => {
+                console.error('复制失败:', err);
+                // 备用复制方法
+                const textarea = document.createElement('textarea');
+                textarea.value = password;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('密码已复制到剪贴板');
+            });
+        }
+        
+        // 上传视频函数
+        function uploadVideo(type) {
+            alert(`即将上传${getVideoName(type)}视频，实际应用中这里会打开文件选择器`);
+            // 实际应用中这里会有文件上传逻辑
+        }
+        
+        // 上传图片函数
+        function uploadImage(type) {
+            alert(`即将上传${getImageName(type)}图片，实际应用中这里会打开文件选择器`);
+            // 实际应用中这里会有文件上传逻辑
+        }
+        
+        // 获取视频名称
+        function getVideoName(type) {
+            const names = {
+                'admissionProcess': '入院流程',
+                'preparation': '住院物品准备',
+                'dietGuide': '糖尿病饮食指导',
+                'ankleExercise': '踝泵运动教学',
+                'specimenCollection': '标本留取指南',
+                'fallPrevention': '跌倒预防',
+                'environmentTour': '环境导览'
+            };
+            return names[type] || '健康宣教';
+        }
+        
+        // 获取图片名称
+        function getImageName(type) {
+            const names = {
+                'floorPlan': '病区平面图'
+            };
+            return names[type] || '图片';
+        }
+        
+        // 初始化页面
+        window.onload = function() {
+            // 默认不显示任何模块
+            document.querySelectorAll('.module-content').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // 为视频卡片添加点击事件
+            document.querySelectorAll('.video-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const title = this.querySelector('h4').textContent;
+                    alert(`即将播放：${title}\n实际应用中这里会播放视频`);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
